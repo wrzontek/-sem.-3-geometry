@@ -22,7 +22,7 @@ public:
     static const Position origin(); // TODO zwraca zwykły a nie const Position
 
     bool operator==(const Position& that) const;
-    Position& operator+=(Vector v);
+    Position& operator+=(const Vector& v);
 };
 
 
@@ -38,7 +38,7 @@ public:
     Vector reflection() const;
 
     bool operator==(const Vector& that) const;
-    Vector& operator+=(Vector v);
+    Vector& operator+=(const Vector& v);
 };
 
 
@@ -57,7 +57,7 @@ public:
     int area() const;
 
     bool operator==(const Rectangle& that) const;
-    Rectangle& operator+=(Vector v);
+    Rectangle& operator+=(const Vector& v);
 };
 
 
@@ -71,7 +71,7 @@ public:
     const Rectangle& operator[](size_t index) const;
     Rectangle& operator[](size_t index);
     bool operator==(const Rectangles& that) const;
-    Rectangles& operator+=(Vector v);
+    Rectangles& operator+=(const Vector& v);
 };
 
 Rectangle merge_horizontally(Rectangle r1, Rectangle r2);

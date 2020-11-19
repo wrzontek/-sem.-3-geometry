@@ -19,11 +19,11 @@ const Position Position::origin() {
     return Position(0,0);
 }
 
-bool Position::operator==(const Position &that) const {
+bool Position::operator==(const Position& that) const {
     return x() == that.x() and y() == that.y();
 }
 
-Position& Position::operator+=(Vector v) {
+Position& Position::operator+=(const Vector& v) {
     x_coord += v.x();
     y_coord += v.y();
     return *this;
@@ -44,11 +44,11 @@ Vector Vector::reflection() const {
     return Vector(y_coord, x_coord);
 }
 
-bool Vector::operator==(const Vector &that) const {
+bool Vector::operator==(const Vector& that) const {
     return x() == that.x() and y() == that.y();
 }
 
-Vector& Vector::operator+=(Vector v) {
+Vector& Vector::operator+=(const Vector& v) {
     x_coord += v.x();
     y_coord += v.y();
     return *this;
@@ -84,14 +84,13 @@ bool Rectangle::operator==(const Rectangle &that) const {
            and pos() == that.pos();
 }
 
-Rectangle& Rectangle::operator+=(Vector v) {
+Rectangle& Rectangle::operator+=(const Vector& v) {
     pos_ += v;
     return *this;
 }
 
 
 Rectangles::Rectangles() = default;
-
 
 size_t Rectangles::size() const {
     return rectangles.size();
@@ -116,7 +115,7 @@ bool Rectangles::operator==(const Rectangles &that) const {
     return true;
 }
 
-Rectangles &Rectangles::operator+=(Vector v) {
+Rectangles &Rectangles::operator+=(const Vector& v) {
     for (int i = 0; i < size(); i++)
         rectangles[i] += v;
 
