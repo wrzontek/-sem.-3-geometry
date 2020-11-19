@@ -3,6 +3,7 @@
 
 
 #include <cstdio>
+#include <vector>
 
 class Position;
 class Vector;
@@ -57,10 +58,11 @@ public:
 
 class Rectangles {
 private:
-
+    std::vector<Rectangle> rectangles;
 public:
     Rectangles();
-    Rectangle& operator[](size_t index);// może jakiś operator overloading tutaj i może w innych miejscach też?
+    const Rectangle& operator[](size_t index) const;// może jakiś operator overloading tutaj i może w innych miejscach też?
+    Rectangle& operator[](size_t index);
     size_t size() const;
     bool operator==(const Rectangles& that) const;
     Rectangles& operator+=(Vector v);

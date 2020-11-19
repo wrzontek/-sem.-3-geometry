@@ -46,7 +46,7 @@ bool Vector::operator==(const Vector &that) const {
     return x() == that.x() and y() == that.y();
 }
 
-Vector &Vector::operator+=(Vector v) {
+Vector& Vector::operator+=(Vector v) {
     x_coord += v.x();
     y_coord += v.y();
     return *this;
@@ -78,7 +78,7 @@ Position Rectangle::pos() const {
     return pos_;
 }
 
-Rectangle &Rectangle::operator+=(Vector v) {
+Rectangle& Rectangle::operator+=(Vector v) {
     pos_ += v;
     return *this;
 }
@@ -91,22 +91,37 @@ Rectangles::Rectangles() {
 
 }
 
-Rectangle &Rectangles::operator[](size_t index) {
-    //TODO
+const Rectangle& Rectangles::operator[](size_t index) const{
+    return rectangles[index];
+}
+
+Rectangle& Rectangles::operator[](size_t index) {
+    return rectangles[index];
 }
 
 size_t Rectangles::size() const {
-    //TODO (pewnie rozmiar tablicy/wektora)
+    return rectangles.size();
 }
 
 bool Rectangles::operator==(const Rectangles &that) const {
-    //TODO (porównanie liniowe tablic)
+    if (size() != that.size())
+        return false;
+
+    for (int i = 0; i < size(); i++)
+        if (!(that[i] == rectangles[i]))
+            return false;
+
+    return true;
 }
 
 Rectangles &Rectangles::operator+=(Vector v) {
-    // TODO (dodajemy v do każdego prostokąta)
+    for (int i = 0; i < size(); i++)
+        rectangles[i] += v;
+
     return *this;
 }
+
+
 
 
 
