@@ -1,7 +1,6 @@
 #ifndef GEOMETRY_LIBRARY_H
 #define GEOMETRY_LIBRARY_H
 
-
 #include <cstdio>
 #include <vector>
 
@@ -16,11 +15,13 @@ private:
     int y_coord;
 public:
     Position(int x, int y);
-    bool operator==(const Position& that) const;
+
     int x() const;
     int y() const;
     Position reflection() const;
     static const Position origin(); // TODO zwraca zwykły a nie const Position
+
+    bool operator==(const Position& that) const;
     Position& operator+=(Vector v);
 };
 
@@ -31,10 +32,12 @@ private:
     int y_coord;
 public:
     Vector(int x, int y);
-    bool operator==(const Vector& that) const;
+
     int x() const;
     int y() const;
     Vector reflection() const;
+
+    bool operator==(const Vector& that) const;
     Vector& operator+=(Vector v);
 };
 
@@ -47,25 +50,34 @@ private:
 public:
     Rectangle(int width, int height, Position p);
     Rectangle(int width, int height);
-    bool operator==(const Rectangle& that) const;
+
     int width() const;
     int height() const;
     Position pos() const;
-    Rectangle& operator+=(Vector v);
     int area() const;
+
+    bool operator==(const Rectangle& that) const;
+    Rectangle& operator+=(Vector v);
 };
 
 
 class Rectangles {
 private:
-    std::vector<Rectangle> rectangles;
+    std::vector<Rectangle> rectangles; // czy takie jest git czy to kopiuje????
 public:
     Rectangles();
-    const Rectangle& operator[](size_t index) const;// może jakiś operator overloading tutaj i może w innych miejscach też?
-    Rectangle& operator[](size_t index);
     size_t size() const;
+
+    const Rectangle& operator[](size_t index) const;
+    Rectangle& operator[](size_t index);
     bool operator==(const Rectangles& that) const;
     Rectangles& operator+=(Vector v);
 };
+
+Rectangle merge_horizontally(Rectangle r1, Rectangle r2);
+
+Rectangle merge_vertically(Rectangle r1, Rectangle r2);
+
+Rectangle merge_all(Rectangles r);
 
 #endif //GEOMETRY_LIBRARY_H

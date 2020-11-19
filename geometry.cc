@@ -1,13 +1,7 @@
 #include "geometry.h"
-
-#include <iostream>
 #include <cassert>
 
 Position::Position(int x, int y): x_coord(x), y_coord(y) {}
-
-bool Position::operator==(const Position &that) const {
-    return x() == that.x() and y() == that.y();
-}
 
 int Position::x() const {
     return x_coord;
@@ -25,6 +19,10 @@ const Position Position::origin() {
     return Position(0,0);
 }
 
+bool Position::operator==(const Position &that) const {
+    return x() == that.x() and y() == that.y();
+}
+
 Position& Position::operator+=(Vector v) {
     x_coord += v.x();
     y_coord += v.y();
@@ -40,6 +38,10 @@ int Vector::x() const {
 
 int Vector::y() const {
     return y_coord;
+}
+
+Vector Vector::reflection() const {
+    return Vector(y_coord, x_coord);
 }
 
 bool Vector::operator==(const Vector &that) const {
@@ -61,11 +63,6 @@ Rectangle::Rectangle(int w, int h): width_(w), height_(h), pos_(Position(0,0)) {
     assert(w > 0 and h > 0);
 }
 
-bool Rectangle::operator==(const Rectangle &that) const {
-    return width() == that.width() and height() == that.height()
-            and pos() == that.pos();
-}
-
 int Rectangle::width() const {
     return width_;
 }
@@ -78,17 +75,26 @@ Position Rectangle::pos() const {
     return pos_;
 }
 
+int Rectangle::area() const {
+    return width() * height();
+}
+
+bool Rectangle::operator==(const Rectangle &that) const {
+    return width() == that.width() and height() == that.height()
+           and pos() == that.pos();
+}
+
 Rectangle& Rectangle::operator+=(Vector v) {
     pos_ += v;
     return *this;
 }
 
-int Rectangle::area() const {
-    return width() * height();
-}
 
-Rectangles::Rectangles() {
+Rectangles::Rectangles() = default;
 
+
+size_t Rectangles::size() const {
+    return rectangles.size();
 }
 
 const Rectangle& Rectangles::operator[](size_t index) const{
@@ -97,10 +103,6 @@ const Rectangle& Rectangles::operator[](size_t index) const{
 
 Rectangle& Rectangles::operator[](size_t index) {
     return rectangles[index];
-}
-
-size_t Rectangles::size() const {
-    return rectangles.size();
 }
 
 bool Rectangles::operator==(const Rectangles &that) const {
