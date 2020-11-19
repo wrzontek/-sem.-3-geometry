@@ -9,6 +9,7 @@ int main() {
     cout << p2.x() << " " << p2.y() << endl;
     Position p3 = Position::origin(); // powinien dawać const
     p3 = p1.reflection(); // źle że działa
+    Vector v1 = Vector(5,15);
     //Position p2 = Position() // nie działa i ma nie działać, git
     return 0;
 }
