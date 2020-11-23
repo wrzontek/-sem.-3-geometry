@@ -3,6 +3,8 @@
 
 Position::Position(int x, int y): x_coord(x), y_coord(y) {}
 
+Position::Position(const Vector& v): x_coord(v.x()), y_coord(v.y()) {}
+
 int Position::x() const {
     return x_coord;
 }
@@ -15,8 +17,9 @@ Position Position::reflection() const {
     return Position(y_coord, x_coord);
 }
 
-const Position Position::origin() {
-    return Position(0,0);
+const Position& Position::origin() {
+    const static Position origin = Position(0,0);
+    return origin;
 }
 
 bool Position::operator==(const Position& that) const {
@@ -29,8 +32,17 @@ Position& Position::operator+=(const Vector& v) {
     return *this;
 }
 
+Position operator+(const Position& p, const Vector& v) {
+    return Position(p) += v;
+}
+Position operator+(const Vector& v, const Position& p) {
+    return Position(p) += v;
+}
+
 
 Vector::Vector(int x, int y): x_coord(x), y_coord(y) {}
+
+Vector::Vector(const Position& p): x_coord(p.x()), y_coord(p.y()) {}
 
 int Vector::x() const {
     return x_coord;
@@ -52,6 +64,10 @@ Vector& Vector::operator+=(const Vector& v) {
     x_coord += v.x();
     y_coord += v.y();
     return *this;
+}
+
+Vector operator+(const Vector& v1, const Vector& v2){
+    return Vector(v1) += v2;
 }
 
 
@@ -89,6 +105,13 @@ Rectangle& Rectangle::operator+=(const Vector& v) {
     return *this;
 }
 
+Rectangle operator+(const Rectangle& r, const Vector& v){
+    return Rectangle(r) += v;
+}
+Rectangle operator+(const Vector& v, const Rectangle& r) {
+    return Rectangle(r) += v;
+}
+
 
 Rectangles::Rectangles() = default;
 
@@ -122,7 +145,17 @@ Rectangles &Rectangles::operator+=(const Vector& v) {
     return *this;
 }
 
+Rectangles::Rectangles(std::initializer_list<Rectangle> list) {
+    for (Rectangle r: list)
+        rectangles.push_back(r);
+}
 
+Rectangles operator+(const Rectangles& rr, const Vector& v) {
+    return Rectangles(rr) += v; //TODO zobacz czy kopiuje ten std::vector czy jest pusty nowy
+}
+Rectangles operator+(const Vector& v, const Rectangles& rr) {
+    return Rectangles(rr) += v; //TODO zobacz czy kopiuje ten std::vector czy jest pusty nowy
+}
 
 
 
