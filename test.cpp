@@ -45,7 +45,12 @@ int main() {
     v10 = Vector(p20);
 
     Rectangles recs1({r3,r4});
-
+    cout << recs1[0].pos().x() << endl;
+    Rectangles recs2 = recs1 + v20;
+    cout << endl;
+    cout << recs2.size() << endl;
+    cout << recs1[0].pos().x() << endl;
+    cout << recs2[0].pos().x() << endl;
     //Rectangles recs2 = std::move(recs1) + Vector(1, 1);
     //Rectangles recs3 = Vector(1, 1) + std::move(recs2);
 

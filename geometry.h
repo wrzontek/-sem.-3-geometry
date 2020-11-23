@@ -21,7 +21,7 @@ public:
     int x() const;
     int y() const;
     Position reflection() const;
-    const static Position& origin(); // TODO zwraca zwykły a nie const Position
+    const static Position& origin();
 
     bool operator==(const Position& that) const;
     Position& operator+=(const Vector& v);

@@ -151,10 +151,10 @@ Rectangles::Rectangles(std::initializer_list<Rectangle> list) {
 }
 
 Rectangles operator+(const Rectangles& rr, const Vector& v) {
-    return Rectangles(rr) += v; //TODO zobacz czy kopiuje ten std::vector czy jest pusty nowy
+    return Rectangles(rr) += v;
 }
 Rectangles operator+(const Vector& v, const Rectangles& rr) {
-    return Rectangles(rr) += v; //TODO zobacz czy kopiuje ten std::vector czy jest pusty nowy
+    return Rectangles(rr) += v;
 }
 
 
