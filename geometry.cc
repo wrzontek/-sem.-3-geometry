@@ -23,7 +23,7 @@ const Position& Position::origin() {
 }
 
 bool Position::operator==(const Position& that) const {
-    return x() == that.x() and y() == that.y();
+    return x() == that.x() && y() == that.y();
 }
 
 Position& Position::operator+=(const Vector& v) {
@@ -57,7 +57,7 @@ Vector Vector::reflection() const {
 }
 
 bool Vector::operator==(const Vector& that) const {
-    return x() == that.x() and y() == that.y();
+    return x() == that.x() && y() == that.y();
 }
 
 Vector& Vector::operator+=(const Vector& v) {
@@ -72,11 +72,11 @@ Vector operator+(const Vector& v1, const Vector& v2){
 
 
 Rectangle::Rectangle(int w, int h, Position p): width_(w), height_(h), pos_(p)  {
-    assert(w > 0 and h > 0);
+    assert(w > 0 && h > 0);
 }
 
 Rectangle::Rectangle(int w, int h): width_(w), height_(h), pos_(Position(0,0)) {
-    assert(w > 0 and h > 0);
+    assert(w > 0 && h > 0);
 }
 
 int Rectangle::width() const {
@@ -96,8 +96,8 @@ int Rectangle::area() const {
 }
 
 bool Rectangle::operator==(const Rectangle &that) const {
-    return width() == that.width() and height() == that.height()
-           and pos() == that.pos();
+    return width() == that.width() && height() == that.height()
+           && pos() == that.pos();
 }
 
 Rectangle& Rectangle::operator+=(const Vector& v) {
