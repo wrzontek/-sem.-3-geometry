@@ -2,6 +2,19 @@
 #include "geometry.h"
 
 using namespace std;
+
+void debug_rectangle(const Rectangle r)
+{
+    cout << "Prostokat o\n - dlugosci " << r.width() << " i wysokosci " << r.height();
+    cout << "\n - wierzcholkach: "
+            <<"("<< r.pos().x() << ", " << r.pos().y() << "), "
+            <<"("<< r.pos().x()+r.width() << ", " << r.pos().y() << "), "
+            <<"("<< r.pos().x() << ", " << r.pos().y()+r.height() << ") i "
+            <<"("<< r.pos().x()+r.width() << ", " << r.pos().y()+r.height() << ").\n";
+    cout << " - polu rownym " << r.area() <<"\n\n";
+    return;
+}
+
 int main() {
     Position p1 = Position(1,2);
     cout << p1.x() << " " << p1.y() << endl;
@@ -55,6 +68,16 @@ int main() {
     //Rectangles recs2 = std::move(recs1) + Vector(1, 1);
     //Rectangles recs3 = Vector(1, 1) + std::move(recs2);
 
+    cout << "laczenie\n";
+    Rectangle podstawowy = Rectangle(10, 10, Position(10, 10));
+    Rectangle poprawny_powyzej = Rectangle(10, 5, Position(10, 15));
+    Rectangle poprawny_ponizej = Rectangle(10, 5, Position(10, 5));
+    Rectangle poprawny_z_lewej = Rectangle(5, 10, Position(5, 10));
+    Rectangle poprawny_z_prawej = Rectangle(5, 10, Position(15, 10));
+    Rectangle zly = Rectangle(10, 10, Position(10, 10));
+
+    Rectangle s1 = merge_horizontally(podstawowy, poprawny_ponizej);
+    debug_rectangle(s1);
 
     //p2 = v1;// nie działa i ma nie działać, git
     //v1 = p2;// nie działa i ma nie działać, git
