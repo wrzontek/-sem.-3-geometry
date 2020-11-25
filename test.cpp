@@ -2,27 +2,27 @@
 #include "geometry.h"
 
 using namespace std;
+
 int main() {
-    Position p1 = Position(1,2);
+    Position p1 = Position(1, 2);
     cout << p1.x() << " " << p1.y() << endl;
     Position p2 = p1.reflection();
     cout << p2.x() << " " << p2.y() << endl;
     Position p3 = Position::origin(); // git chyba
-    Vector v1 = Vector(5,15);
+    Vector v1 = Vector(5, 15);
     Vector v2 = Vector(30, 40);
     //Position p2 = Position() // nie działa i ma nie działać, git
 
 
-    Rectangle r1 = Rectangle(10,20);
+    Rectangle r1 = Rectangle(10, 20);
     Rectangle r2 = Rectangle(50, 100, p1);
-    Rectangle r3 = Rectangle(5,5);
-    Rectangle r4 = Rectangle(10,10,Position(5,5));
+    Rectangle r3 = Rectangle(5, 5);
+    Rectangle r4 = Rectangle(10, 10, Position(5, 5));
 
     Rectangles rr1 = Rectangles();
     cout << rr1.size() << endl;
 
     Rectangles rr2 = Rectangles({r1, r2});
-
 
 
     Position p4 = p1 + v1;
@@ -44,7 +44,7 @@ int main() {
     p20 = Position(v10);
     v10 = Vector(p20);
 
-    Rectangles recs1({r3,r4});
+    Rectangles recs1({r3, r4});
     cout << recs1[0].pos().x() << endl;
     Rectangles recs2 = recs1 + v20;
     cout << endl;
@@ -52,6 +52,13 @@ int main() {
     cout << recs1[0].pos().x() << endl;
     cout << recs2[0].pos().x() << endl;
 
+
+    cout << endl;
+
+    Rectangle r20 = Rectangle(33, 44);
+    Rectangle r30 = r20;
+    r30 += v20;
+    cout << r20.pos().x() << " " << r30.pos().x() << endl;
     //Rectangles recs2 = std::move(recs1) + Vector(1, 1);
     //Rectangles recs3 = Vector(1, 1) + std::move(recs2);
 
