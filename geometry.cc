@@ -116,13 +116,7 @@ Rectangle operator+(const Vector &v, const Rectangle &r) {
 }
 
 
-Rectangles::Rectangles() = default;
-
 Rectangles::Rectangles(std::initializer_list<Rectangle> list) : rectangles(list) {}
-
-Rectangles::~Rectangles() {
-    //TODO ??? chyba nie ale może trzeba
-}
 
 size_t Rectangles::size() const {
     return rectangles.size();

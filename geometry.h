@@ -3,6 +3,7 @@
 
 #include <cstdio>
 #include <vector>
+#include <cassert>
 
 class Position;
 
@@ -84,9 +85,20 @@ class Rectangles {
 private:
     std::vector<Rectangle> rectangles;
 public:
-    Rectangles();
+    Rectangles() = default;
+    Rectangles(const Rectangles&) {
+        assert(((void)"Used copy constructor", false));
+    }
+    Rectangles& operator=(const Rectangles&) {
+        assert(((void)"Used copy assignment", false));
+    }
+    Rectangles(Rectangles&&) noexcept = default;
+    Rectangles& operator=(Rectangles&&) noexcept = default;
+    ~Rectangles() = default;
+
+    //Rectangles() = default;
     Rectangles(std::initializer_list<Rectangle>);
-    ~Rectangles();
+    //~Rectangles() = default;
 
     size_t size() const;
 
