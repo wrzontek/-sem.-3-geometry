@@ -21,7 +21,7 @@ int main() {
     Rectangles rr1 = Rectangles();
     cout << rr1.size() << endl;
 
-    //Rectangles rr2 = Rectangles({r1, r2});
+    Rectangles rr2 = Rectangles({r1, r2});
 
 
 
@@ -30,7 +30,7 @@ int main() {
     Vector v3 = v1 + v2;
     Rectangle r5 = r1 + v1;
     Rectangle r6 = v1 + r1;
-    Rectangles rr2 = rr1 + v1;
+    Rectangles rr4 = rr1 + v1;
     Rectangles rr3 = v1 + rr2;
 
     Position p10(1, 2);
@@ -51,6 +51,7 @@ int main() {
     cout << recs2.size() << endl;
     cout << recs1[0].pos().x() << endl;
     cout << recs2[0].pos().x() << endl;
+
     //Rectangles recs2 = std::move(recs1) + Vector(1, 1);
     //Rectangles recs3 = Vector(1, 1) + std::move(recs2);
 

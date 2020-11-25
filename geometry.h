@@ -64,6 +64,7 @@ public:
     bool operator==(const Rectangle& that) const;
     Rectangle& operator+=(const Vector& v);
 };
+
 Rectangle operator+(const Rectangle& r, const Vector& v);
 Rectangle operator+(const Vector& v, const Rectangle& r); //TODO kopiowanie kodu
 

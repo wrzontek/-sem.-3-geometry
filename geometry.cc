@@ -1,5 +1,6 @@
 #include "geometry.h"
 #include <cassert>
+#include <algorithm>
 
 Position::Position(int x, int y): x_coord(x), y_coord(y) {}
 
@@ -157,5 +158,41 @@ Rectangles operator+(const Vector& v, const Rectangles& rr) {
     return Rectangles(rr) += v;
 }
 
+bool has_common_horizontal_edge(const Rectangle r1, const Rectangle r2){
+    return  ((r1.pos().x() == r2.pos().x() && r1.width() == r2.width()) &&
+             (r1.pos().y() + r1.height() == r2.pos().y() || r2.pos().y() + r2.height() == r1.pos().y()));
+}
+bool has_common_vertical_edge(const Rectangle r1, const Rectangle r2){
+    return  ((r1.pos().y() == r2.pos().y() && r1.height() == r2.height()) &&
+             (r1.pos().x() + r1.width() == r2.pos().x() || r2.pos().x() + r2.width() == r1.pos().x()));
+}
 
+Rectangle merge_horizontally(const Rectangle r1, const Rectangle r2) {
+    assert(has_common_horizontal_edge(r1, r2));
 
+    return Rectangle(r1.width(), r1.height() + r2.height(),
+                     Position(r1.pos().x(), std::min(r1.pos().y(), r2.pos().y())));
+
+}
+
+Rectangle merge_vertically(const Rectangle r1, const Rectangle r2) {
+    assert(has_common_vertical_edge(r1, r2));
+
+    return Rectangle( r1.width() + r2.width(), r1.height(),
+        Position(std::min(r1.pos().x(), r2.pos().x()), r1.pos().y()));
+}
+
+Rectangle merge_all(const Rectangles& rr) {
+    if(rr.size() == 0)
+        return Rectangle(0, 0);
+
+    Rectangle merged = Rectangle(rr[0].width(), rr[0].height(), rr[0].pos());
+
+    for(size_t i = 1; i < rr.size(); i++) {
+        if(has_common_horizontal_edge(merged, rr[i]))
+            merged = merge_horizontally(merged, rr[i]);
+        else
+            merged = merge_vertically(merged, rr[i]);
+    }
+    return merged;
+}
