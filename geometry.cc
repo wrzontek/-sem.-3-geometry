@@ -1,6 +1,6 @@
 #include "geometry.h"
-#include <cassert>
 #include <algorithm>
+#include <cassert>
 
 Position::Position(int x, int y) : x_coord(x), y_coord(y) {}
 
@@ -129,6 +129,8 @@ const Rectangle &Rectangles::operator[](size_t index) const {
 }
 
 Rectangle &Rectangles::operator[](size_t index) {
+    assert(index < size());
+
     return rectangles[index];
 }
 
@@ -158,6 +160,15 @@ Rectangles operator+(const Vector &v, const Rectangles &rr) {
     return Rectangles(rr) += v;
 }
 
+Rectangles operator+(const Vector &v, Rectangles &&rr) {
+    return std::move(rr) + v;
+}
+
+Rectangles operator+(Rectangles &&rr, const Vector &v) {
+    Rectangles result(std::move(rr));
+    result += v;
+    return result;
+}
 
 bool has_common_horizontal_edge(const Rectangle &r1, const Rectangle &r2) {
     return ((r1.pos().x() == r2.pos().x() && r1.width() == r2.width()) &&

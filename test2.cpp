@@ -37,14 +37,13 @@ int main() {
     Vector v{12, 5};
     const Vector cv{-21, 34};
 
-    std::cout << "Raz!" << std::endl;
 
-    Rectangles r1 = std::move(tm1) + cv; //TODO te nie działają
+
+    Rectangles r1 = std::move(tm1) + cv;
     Rectangles r2 = cv + std::move(tm2);
     Rectangles r3 = std::move(tm3) + v;
     Rectangles r4 = v + std::move(tm4);
 
-    std::cout << "Dwa!" << std::endl;
 
     assert(r1 == result);
     assert(r2 == result);

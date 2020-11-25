@@ -3,14 +3,10 @@
 
 #include <cstdio>
 #include <vector>
-#include <cassert>
 
 class Position;
-
 class Vector;
-
 class Rectangle;
-
 class Rectangles;
 
 
@@ -34,7 +30,7 @@ public:
 };
 
 Position operator+(const Position &p, const Vector &v);
-Position operator+(const Vector &v, const Position &p); //TODO bez kopiowania kodu to zrobić??
+Position operator+(const Vector &v, const Position &p);
 
 
 class Vector {
@@ -60,7 +56,7 @@ Vector operator+(const Vector &v1, const Vector &v2);
 class Rectangle {
 private:
     int width_;
-    int height_; // czy takie nazewnictwo (te _) git? to żeby gettery mogły mieć normalne nazwy
+    int height_;
     Position pos_;
 public:
     Rectangle(int width, int height, Position p);
@@ -86,19 +82,10 @@ private:
     std::vector<Rectangle> rectangles;
 public:
     Rectangles() = default;
-    Rectangles(const Rectangles&) {
-        assert(((void)"Used copy constructor", false));
-    }
-    Rectangles& operator=(const Rectangles&) {
-        assert(((void)"Used copy assignment", false));
-    }
-    Rectangles(Rectangles&&) noexcept = default;
-    Rectangles& operator=(Rectangles&&) noexcept = default;
-    ~Rectangles() = default;
-
-    //Rectangles() = default;
     Rectangles(std::initializer_list<Rectangle>);
-    //~Rectangles() = default;
+    Rectangles(const Rectangles &other) = default;
+    Rectangles(Rectangles&&) noexcept = default;
+    ~Rectangles() = default;
 
     size_t size() const;
 
@@ -106,10 +93,15 @@ public:
     Rectangle &operator[](size_t index);
     bool operator==(const Rectangles &that) const;
     Rectangles &operator+=(const Vector &v);
+    Rectangles &operator=(Rectangles&&) noexcept = default;
+    Rectangles &operator=(const Rectangles &other) = default;
 };
 
 Rectangles operator+(const Rectangles &rr, const Vector &v);
 Rectangles operator+(const Vector &v, const Rectangles &rr);
+
+Rectangles operator+(const Vector &v, Rectangles &&rr);
+Rectangles operator+(Rectangles && rr, const Vector &v);
 
 Rectangle merge_horizontally(const Rectangle &r1, const Rectangle &r2);
 
