@@ -3,6 +3,8 @@
 
 #include <cstdio>
 #include <vector>
+#include <cstdint>
+#include <cassert>
 
 class Position;
 class Vector;
@@ -12,15 +14,15 @@ class Rectangles;
 
 class Position {
 private:
-    int x_coord;
-    int y_coord;
+    int_fast32_t x_coord;
+    int_fast32_t y_coord;
 public:
-    Position(int x, int y);
+    Position(int_fast32_t x, int_fast32_t y);
     Position(const Position &other) = default;
     explicit Position(const Vector &v);
 
-    int x() const;
-    int y() const;
+    int_fast32_t x() const;
+    int_fast32_t y() const;
     Position reflection() const;
     const static Position &origin();
 
@@ -35,15 +37,15 @@ Position operator+(const Vector &v, const Position &p);
 
 class Vector {
 private:
-    int x_coord;
-    int y_coord;
+    int_fast32_t x_coord;
+    int_fast32_t y_coord;
 public:
-    Vector(int x, int y);
+    Vector(int_fast32_t x, int_fast32_t y);
     Vector(const Vector &other) = default;
     explicit Vector(const Position &p);
 
-    int x() const;
-    int y() const;
+    int_fast32_t x() const;
+    int_fast32_t y() const;
     Vector reflection() const;
 
     bool operator==(const Vector &that) const;
@@ -55,18 +57,18 @@ Vector operator+(const Vector &v1, const Vector &v2);
 
 class Rectangle {
 private:
-    int width_;
-    int height_;
+    int_fast32_t width_;
+    int_fast32_t height_;
     Position pos_;
 public:
-    Rectangle(int width, int height, Position p);
-    Rectangle(int width, int height);
+    Rectangle(int_fast32_t width, int_fast32_t height, Position p);
+    Rectangle(int_fast32_t width, int_fast32_t height);
     Rectangle(const Rectangle &other) = default;
 
-    int width() const;
-    int height() const;
+    int_fast32_t width() const;
+    int_fast32_t height() const;
     Position pos() const;
-    int area() const;
+    int_fast32_t area() const;
 
     bool operator==(const Rectangle &that) const;
     Rectangle &operator+=(const Vector &v);

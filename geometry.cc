@@ -2,15 +2,15 @@
 #include <algorithm>
 #include <cassert>
 
-Position::Position(int x, int y) : x_coord(x), y_coord(y) {}
+Position::Position(int_fast32_t x, int_fast32_t y) : x_coord(x), y_coord(y) {}
 
 Position::Position(const Vector &v) : x_coord(v.x()), y_coord(v.y()) {}
 
-int Position::x() const {
+int_fast32_t Position::x() const {
     return x_coord;
 }
 
-int Position::y() const {
+int_fast32_t Position::y() const {
     return y_coord;
 }
 
@@ -42,15 +42,15 @@ Position operator+(const Vector &v, const Position &p) {
 }
 
 
-Vector::Vector(int x, int y) : x_coord(x), y_coord(y) {}
+Vector::Vector(int_fast32_t x, int_fast32_t y) : x_coord(x), y_coord(y) {}
 
 Vector::Vector(const Position &p) : x_coord(p.x()), y_coord(p.y()) {}
 
-int Vector::x() const {
+int_fast32_t Vector::x() const {
     return x_coord;
 }
 
-int Vector::y() const {
+int_fast32_t Vector::y() const {
     return y_coord;
 }
 
@@ -73,19 +73,19 @@ Vector operator+(const Vector &v1, const Vector &v2) {
 }
 
 
-Rectangle::Rectangle(int w, int h, Position p) : width_(w), height_(h), pos_(p) {
+Rectangle::Rectangle(int_fast32_t w, int_fast32_t h, Position p) : width_(w), height_(h), pos_(p) {
     assert(w > 0 && h > 0);
 }
 
-Rectangle::Rectangle(int w, int h) : width_(w), height_(h), pos_(Position(0, 0)) {
+Rectangle::Rectangle(int_fast32_t w, int_fast32_t h) : width_(w), height_(h), pos_(Position(0, 0)) {
     assert(w > 0 && h > 0);
 }
 
-int Rectangle::width() const {
+int_fast32_t Rectangle::width() const {
     return width_;
 }
 
-int Rectangle::height() const {
+int_fast32_t Rectangle::height() const {
     return height_;
 }
 
@@ -93,7 +93,7 @@ Position Rectangle::pos() const {
     return pos_;
 }
 
-int Rectangle::area() const {
+int_fast32_t Rectangle::area() const {
     return width() * height();
 }
 
@@ -138,7 +138,7 @@ bool Rectangles::operator==(const Rectangles &that) const {
     if (size() != that.size())
         return false;
 
-    for (int i = 0; i < size(); i++)
+    for (size_t i = 0; i < size(); i++)
         if (!(that[i] == rectangles[i]))
             return false;
 
@@ -146,7 +146,7 @@ bool Rectangles::operator==(const Rectangles &that) const {
 }
 
 Rectangles &Rectangles::operator+=(const Vector &v) {
-    for (int i = 0; i < size(); i++)
+    for (size_t i = 0; i < size(); i++)
         rectangles[i] += v;
 
     return *this;

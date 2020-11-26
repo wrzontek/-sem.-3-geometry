@@ -487,14 +487,14 @@ int main() {
     // Rectangles& Rectangles::operator+=(const Vector&)
     assert((std::is_same_v<std::invoke_result_t<decltype(&Rectangles::operator+=), Rectangles, const Vector &>, Rectangles &>));
 
-     //DNC: pos27 = vec26;
-     //DNC: vec26 = pos27;
-     //DNC: Position pos28 = vec27;
-     //DNC: Vector vec28 = pos27;
-     //DNC: recs4[0] = rec102;
-     //DNC: Rectangle &recRef1 = recs4[0];
+     //pos27 = vec26;
+     //vec26 = pos27;
+     //Position pos28 = vec27;
+     //Vector vec28 = pos27;
+     //recs4[0] = rec102;
+     //Rectangle &recRef1 = recs4[0];
 
-    // DNR: recs3[3];
+    //recs3[3];
     // DNR: recs4[3];
     // DNR: Rectangle rec3{0, 0};
     // DNR: Rectangle rec4{3, 0};
